@@ -240,58 +240,58 @@ class ModalManager {
   }
 }
 
-  setupFormSubmission() {
-    const demoForm = document.getElementById('demo-form');
-    if (demoForm) {
-      demoForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.handleDemoSubmission(new FormData(demoForm));
-      });
-    }
-  }
+//   setupFormSubmission() {
+//     const demoForm = document.getElementById('demo-form');
+//     if (demoForm) {
+//       demoForm.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         this.handleDemoSubmission(new FormData(demoForm));
+//       });
+//     }
+//   }
 
-  handleDemoSubmission(formData) {
-    const submitBtn = document.querySelector('#demo-form button[type="submit"]');
-    const originalText = submitBtn.textContent;
+//   handleDemoSubmission(formData) {
+//     const submitBtn = document.querySelector('#demo-form button[type="submit"]');
+//     const originalText = submitBtn.textContent;
     
-    submitBtn.textContent = 'Scheduling...';
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.7';
+//     submitBtn.textContent = 'Scheduling...';
+//     submitBtn.disabled = true;
+//     submitBtn.style.opacity = '0.7';
 
-    // Simulate API call with better UX
-    setTimeout(() => {
-      // Create success message
-      const successMsg = document.createElement('div');
-      successMsg.innerHTML = `
-        <div style="
-          background: linear-gradient(135deg, #00d4ff 0%, #6366f1 100%);
-          color: white;
-          padding: 1rem;
-          border-radius: 12px;
-          text-align: center;
-          margin-bottom: 1rem;
-          animation: slideIn 0.3s ease;
-        ">
-          <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i>
-          Demo scheduled successfully! We'll contact you shortly.
-        </div>
-      `;
+//     // Simulate API call with better UX
+//     setTimeout(() => {
+//       // Create success message
+//       const successMsg = document.createElement('div');
+//       successMsg.innerHTML = `
+//         <div style="
+//           background: linear-gradient(135deg, #00d4ff 0%, #6366f1 100%);
+//           color: white;
+//           padding: 1rem;
+//           border-radius: 12px;
+//           text-align: center;
+//           margin-bottom: 1rem;
+//           animation: slideIn 0.3s ease;
+//         ">
+//           <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i>
+//           Demo scheduled successfully! We'll contact you shortly.
+//         </div>
+//       `;
       
-      const modalBody = document.querySelector('.modal-body');
-      modalBody.insertBefore(successMsg, modalBody.firstChild);
+//       const modalBody = document.querySelector('.modal-body');
+//       modalBody.insertBefore(successMsg, modalBody.firstChild);
       
-      setTimeout(() => {
-        this.closeModal();
-        document.getElementById('demo-form').reset();
-        successMsg.remove();
+//       setTimeout(() => {
+//         this.closeModal();
+//         document.getElementById('demo-form').reset();
+//         successMsg.remove();
         
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-      }, 2000);
-    }, 1500);
-  }
-}
+//         submitBtn.textContent = originalText;
+//         submitBtn.disabled = false;
+//         submitBtn.style.opacity = '1';
+//       }, 2000);
+//     }, 1500);
+//   }
+// }
 
 // Form Management
 class FormManager {
