@@ -1185,7 +1185,7 @@ body[data-theme="dark"]::before {
 }
 /* Logo image size and alignment */
 .logo-img {
-  height: 70px;         /* Adjust this up/down for better fit */
+  height: 90px;         /* Adjust this up/down for better fit */
   width: auto;
   object-fit: contain;
   display: block;
