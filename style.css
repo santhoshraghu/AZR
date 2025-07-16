@@ -1183,3 +1183,11 @@ body[data-theme="dark"]::before {
     transform: translateY(0);
   }
 }
+/* Logo image size and alignment */
+.logo-img {
+  height: 60px;         /* Adjust this up/down for better fit */
+  width: auto;
+  object-fit: contain;
+  display: block;
+  padding: 5px 0;
+}
