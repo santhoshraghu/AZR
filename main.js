@@ -184,7 +184,6 @@ class ModalManager {
   init() {
     this.setupTriggers();
     this.setupCloseHandlers();
-    this.setupFormSubmission();
   }
 
   setupTriggers() {
@@ -228,19 +227,7 @@ class ModalManager {
     if (this.modal) {
       this.modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
-      
-      // Set minimum date to today
-      const dateInput = document.getElementById('demo-date');
-      if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
-      }
-
-      // Focus first input
-      setTimeout(() => {
-        const firstInput = this.modal.querySelector('input');
-        if (firstInput) firstInput.focus();
-      }, 100);
+      console.log('Calendly modal opened');
     }
   }
 
