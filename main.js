@@ -175,6 +175,7 @@ class NavigationManager {
 }
 
 // Modal Management
+// Modal Management (for Calendly embed only)
 class ModalManager {
   constructor() {
     this.modal = document.getElementById('demo-modal');
@@ -187,7 +188,7 @@ class ModalManager {
   }
 
   setupTriggers() {
-    // Demo buttons
+    // All demo buttons
     const demoButtons = [
       document.getElementById('demo-btn'),
       document.getElementById('hero-demo-btn'),
@@ -203,7 +204,7 @@ class ModalManager {
 
   setupCloseHandlers() {
     const closeBtn = document.querySelector('.close');
-    
+
     if (closeBtn) {
       closeBtn.addEventListener('click', () => this.closeModal());
     }
@@ -227,7 +228,7 @@ class ModalManager {
     if (this.modal) {
       this.modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
-      console.log('Calendly modal opened');
+      console.log('Opened demo modal with Calendly embed');
     }
   }
 
@@ -237,6 +238,7 @@ class ModalManager {
       document.body.style.overflow = 'auto';
     }
   }
+}
 
   setupFormSubmission() {
     const demoForm = document.getElementById('demo-form');
