@@ -1,401 +1,1834 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EnerPrice - Energy Pricing Intelligence & Risk Management</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="epdfav.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  </head>
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="nav-logo">
-          <a href="#home">
-            <img src="eplogo.png" alt="EnerPrice Logo" class="logo-img" />
-          </a>
-        </div>
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#services" class="nav-link">Products</a></li>
-          <li><a href="#founder" class="nav-link">Team</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-          <li><button onclick="window.location.href='https://app.enerpricedata.com/'" class="demo-button">Login to the app</button></li>
-        </ul>
-        <div class="theme-controls">
-          <button id="theme-toggle" class="theme-toggle">
-            <i class="fas fa-moon"></i>
-          </button>
-        </div>
-        <div class="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </nav>
+    <style>
+        :root {
+            --primary: #1a5f7a;
+            --primary-dark: #0d3d4d;
+            --accent: #57c5b6;
+            --accent-light: #9fe8dc;
+            --dark: #0a1628;
+            --dark-blue: #112240;
+            --light: #f8fafb;
+            --gray: #64748b;
+            --gradient-energy: linear-gradient(135deg, #1a5f7a 0%, #57c5b6 50%, #9fe8dc 100%);
+            --gradient-dark: linear-gradient(180deg, #0a1628 0%, #112240 100%);
+        }
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <h1 class="hero-title">Precision-Driven Energy Pricing Intelligence</h1>
-          <p class="hero-subtitle">Leading energy risk management and price forecasting solutions for the modern energy landscape</p>
-          <div class="hero-buttons">
-            <button class="btn-primary" id="hero-demo-btn">Schedule Demo</button>
-            <a href="#services" class="btn-secondary">Products</a>
-          </div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header / Navbar (from index.html) */
+        .header {
+            background: var(--gradient-dark);
+            padding: 0.5rem 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            box-sizing: border-box;
+            height: 64px;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 200%;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 100%;
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .schedule-demo-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: var(--gradient-energy);
+            color: var(--dark);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .schedule-demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(87, 197, 182, 0.35);
+        }
+
+        .login-app-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.35);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-app-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Hero Section with energy grid (flickering animation from index.html) */
+        .hero {
+            background: var(--gradient-dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse at 70% 30%, rgba(87, 197, 182, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -20%;
+            width: 80%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(26, 95, 122, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(87, 197, 182, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(87, 197, 182, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(87, 197, 182, 0.1);
+            border: 1px solid rgba(87, 197, 182, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge-icon {
+            height: 1em;
+            width: auto;
+            object-fit: contain;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-energy);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-energy);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(87, 197, 182, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Energy grid flickering animation (from index.html) */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .energy-grid {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        .grid-node {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            background: rgba(26, 95, 122, 0.2);
+            border: 2px solid rgba(87, 197, 182, 0.4);
+            border-radius: 50%;
+            backdrop-filter: blur(8px);
+            animation: gridPulse 3s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid-node::before {
+            content: '';
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-energy);
+            border-radius: 50%;
+            opacity: 0.9;
+        }
+
+        .grid-node:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .grid-node:nth-child(2) { top: 50%; left: 0; transform: translateY(-50%); animation-delay: 0.5s; }
+        .grid-node:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); animation-delay: 1s; }
+        .grid-node:nth-child(4) { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
+
+        .grid-connection {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(87, 197, 182, 0.5), transparent);
+            height: 2px;
+            animation: gridFlow 2s infinite;
+        }
+
+        .grid-connection:nth-child(5) {
+            top: 50%;
+            left: 32px;
+            right: 32px;
+            transform: translateY(-50%);
+        }
+
+        .grid-connection:nth-child(6) {
+            left: 50%;
+            top: 32px;
+            bottom: 32px;
+            width: 2px;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, transparent, rgba(87, 197, 182, 0.5), transparent);
+        }
+
+        @keyframes gridPulse {
+            0%, 100% {
+                opacity: 0.6;
+                box-shadow: 0 0 20px rgba(87, 197, 182, 0.3);
+            }
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 40px rgba(87, 197, 182, 0.6);
+            }
+        }
+
+        @keyframes gridFlow {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            padding: 3rem 2rem;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-dark {
+            background: var(--gradient-dark);
+            color: white;
+        }
+
+        .section-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-dark .section-subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Capabilities Grid */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .capability-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .capability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-energy);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .capability-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .capability-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(26, 95, 122, 0.1) 0%, rgba(87, 197, 182, 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .capability-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .capability-description {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .capability-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(87, 197, 182, 0.1);
+            color: var(--primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Services Accordion */
+        .services-accordion {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            border-color: rgba(87, 197, 182, 0.3);
+        }
+
+        .service-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .service-title span {
+            font-size: 1.5rem;
+        }
+
+        .service-toggle {
+            color: var(--accent);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-item.active .service-toggle {
+            transform: rotate(45deg);
+        }
+
+        .service-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .service-item.active .service-content {
+            max-height: 500px;
+        }
+
+        .service-body {
+            padding: 0 2rem 1.5rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .service-list {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .service-list li::before {
+            content: '→';
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* Platform Section */
+        .platform-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .platform-visual {
+            background: var(--gradient-dark);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .platform-carousel-wrap {
+            padding: 1.25rem 0;
+        }
+
+        .epdc-carousel {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .epdc-carousel-inner {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+
+        .epdc-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 0;
+        }
+
+        .epdc-slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+        }
+
+        .epdc-slide img {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .epdc-slide-label {
+            flex-shrink: 0;
+            padding: 0.5rem 0 0.25rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .epdc-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            font-size: 1.75rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .epdc-carousel-btn:hover {
+            background: rgba(87, 197, 182, 0.3);
+            border-color: var(--accent);
+        }
+
+        .epdc-prev { left: 0.5rem; }
+        .epdc-next { right: 0.5rem; }
+
+        .epdc-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0 0.25rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .epdc-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .epdc-dot:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .epdc-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .platform-features {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .platform-feature {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .platform-feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(26, 95, 122, 0.1) 0%, rgba(87, 197, 182, 0.1) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .platform-feature h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .platform-feature p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Team / Founder Section (from index.html) */
+        .founder-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .founder-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .founder-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .founder-bio h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .founder-bio p {
+            color: var(--gray);
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+
+        /* Contact Section (from index.html) */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3,
+        .contact-form h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .contact-info .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .contact-info .contact-item i {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-top: 0.25rem;
+        }
+
+        .contact-info .contact-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            color: var(--dark);
+        }
+
+        .contact-info .contact-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Modal (Schedule Demo - from index.html) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-box {
+            max-height: 90vh;
+            overflow-y: auto;
+            background: #f4f4f4;
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .modal-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--dark);
+        }
+
+        .modal-body p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .calendly-inline-widget {
+            min-height: 600px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-logo-icon {
+            height: 1.5rem;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .energy-grid {
+                width: 260px;
+                height: 260px;
+            }
+
+            .grid-node {
+                width: 52px;
+                height: 52px;
+            }
+
+            .grid-node::before {
+                width: 26px;
+                height: 26px;
+            }
+
+            .platform-showcase {
+                grid-template-columns: 1fr;
+            }
+
+
+            .founder-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--gradient-dark);
+            padding: 1.5rem 2rem;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav a,
+        .mobile-nav .schedule-demo-btn,
+        .mobile-nav .login-app-btn {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .stats-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with logo, Schedule Demo, Login to app -->
+    <header class="header">
+        <div class="header-content">
+            <div class="nav-logo">
+                <a href="#home">
+                    <img src="eplogo.png" alt="EnerPrice Logo" class="logo-img" />
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#capabilities">Capabilities</a>
+                <a href="#services">Services</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
+                <button type="button" class="schedule-demo-btn" id="hero-demo-btn">Schedule Demo</button>
+                <a href="https://app.enerpricedata.com/" class="login-app-btn" target="_blank" rel="noopener">Login to the app</a>
+            </nav>
+            <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-        <div class="hero-visual">
-          <div class="energy-grid">
-            <div class="grid-node"></div>
-            <div class="grid-node"></div>
-            <div class="grid-node"></div>
-            <div class="grid-node"></div>
-            <div class="grid-connection"></div>
-            <div class="grid-connection"></div>
-          </div>
+    </header>
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="#home">Home</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#services">Services</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+        <button type="button" class="schedule-demo-btn" id="mobile-demo-btn">Schedule Demo</button>
+        <a href="https://app.enerpricedata.com/" class="login-app-btn" target="_blank" rel="noopener">Login to the app</a>
+    </div>
+
+    <!-- Hero Section with energy grid flickering animation -->
+    <section class="hero" id="home">
+        <div class="grid-pattern"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge"><img src="epdfav.png" alt="" class="hero-badge-icon" />Energy Market Intelligence</div>
+                <h1>Stay <span>Ahead Of The Curve</span></h1>
+                <p class="hero-subtitle">
+                    Reliable market data, pricing analytics, and operational insight for U.S. power and natural gas markets.
+                    Built on proprietary data infrastructure and practical market experience.
+                </p>
+                <div class="hero-cta">
+                    <button type="button" class="btn btn-primary schedule-demo-btn" id="schedule-demo-hero">Schedule Demo</button>
+                    <a href="#capabilities" class="btn btn-secondary">Explore Capabilities</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="energy-grid">
+                    <div class="grid-node"></div>
+                    <div class="grid-node"></div>
+                    <div class="grid-node"></div>
+                    <div class="grid-node"></div>
+                    <div class="grid-connection"></div>
+                    <div class="grid-connection"></div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-content">
+            <div class="stat-item">
+                <div class="stat-number">60+</div>
+                <div class="stat-label">Months Forward Coverage</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Major ISOs Covered</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">120</div>
+                <div class="stat-label">Months Extended Coverage</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Data Platform Access</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Capabilities Section -->
+    <section class="section" id="capabilities">
+        <div class="section-content">
+            <div class="section-header">
+                <div class="section-tag">What We Offer</div>
+                <h2 class="section-title">Core Capabilities</h2>
+                <p class="section-subtitle">
+                    Full requirements market data and analytics supporting pricing, valuation,
+                    and risk management across U.S. power and natural gas markets.
+                </p>
+            </div>
+
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">📊</div>
+                    <h3 class="capability-title">Market Data & Analytics</h3>
+                    <p class="capability-description">
+                        Granular forward market costs by ISO, zone, and utility. Delivered through
+                        the EnerPrice Data Center (EPDC) or integrated directly into your workflows.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">Energy Futures</span>
+                        <span class="feature-tag">Capacity Forecasts</span>
+                        <span class="feature-tag">REC Prices</span>
+                        <span class="feature-tag">RPS Forecasts</span>
+                        <span class="feature-tag">Utility PTC</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">💰</div>
+                    <h3 class="capability-title">Pricing, Structuring & Valuation</h3>
+                    <p class="capability-description">
+                        Commercial decision support across retail and wholesale power markets
+                        including daily prices, matrix pricing, and custom product structuring.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">Daily Pricing</span>
+                        <span class="feature-tag">Matrix Pricing</span>
+                        <span class="feature-tag">Block & Index</span>
+                        <span class="feature-tag">Capped Structures</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">🛡️</div>
+                    <h3 class="capability-title">Risk Management & Portfolio Support</h3>
+                    <p class="capability-description">
+                        Maintain visibility and control in day-to-day portfolio operations
+                        with position tracking, hedging support, and risk reporting.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">Position Management</span>
+                        <span class="feature-tag">Hedge Analysis</span>
+                        <span class="feature-tag">Scheduling</span>
+                        <span class="feature-tag">Risk Reporting</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">⚖️</div>
+                    <h3 class="capability-title">Regulatory & Compliance</h3>
+                    <p class="capability-description">
+                        Navigate regulatory exposure with comprehensive market data, continuous
+                        research into rules and tariffs, and decades of portfolio management experience.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">RPS Compliance</span>
+                        <span class="feature-tag">FERC Tracking</span>
+                        <span class="feature-tag">Lost Savings</span>
+                        <span class="feature-tag">PTC Analysis</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">⚙️</div>
+                    <h3 class="capability-title">Asset Management & Optimization</h3>
+                    <p class="capability-description">
+                        Streamline operational tasks with ISO system integration, billing validation,
+                        and automated workflows from forecast through settlement.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">DA Forecasting</span>
+                        <span class="feature-tag">Load Reconciliation</span>
+                        <span class="feature-tag">Billing Validation</span>
+                        <span class="feature-tag">Automation</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">🎯</div>
+                    <h3 class="capability-title">Strategic Advisory & Reporting</h3>
+                    <p class="capability-description">
+                        Evaluate new opportunities, enter new markets, and make informed
+                        commercial decisions with executive-level dashboards and insights.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">Market Entry</span>
+                        <span class="feature-tag">ISO Registration</span>
+                        <span class="feature-tag">Executive Dashboards</span>
+                        <span class="feature-tag">PPA Review</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Services Section -->
-    <!-- Services Section -->
-<section id="services" class="services">
-  <div class="container">
-    <div class="section-header">
-      <h2>Products</h2>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-robot"></i>
-        </div>
-        <h3>Automatic Pricing Models</h3>
-        <p>Finetuned pricing models that deliver go-to-market rates in seconds.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-chart-line"></i>
-        </div>
-        <h3>Energy Pricing Data</h3>
-        <p>30+ year forecasting for every instrument influencing energy pricing, guided by expert domain knowledge.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-balance-scale"></i>
-        </div>
-        <h3>Utility Price to Compare Data</h3>
-        <p>Instantly evaluate your competitiveness relative to the utility with historical, current, and forecasted PTC data.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <section class="section section-dark" id="services">
+        <div class="section-content">
+            <div class="section-header">
+                <div class="section-tag">How We Deliver</div>
+                <h2 class="section-title">Service Areas</h2>
+                <p class="section-subtitle">
+                    Flexible engagement models from self-service data access to fully outsourced
+                    analytical and operational support.
+                </p>
+            </div>
 
-    <!-- Solutions Section -->
-    
-    <!-- <section id="solutions" class="solutions">
-      <div class="container">
-        <div class="section-header">
-          <h2>Advanced Energy Solutions</h2>
-          <p>Cutting-edge technologies driving the future of energy management</p>
-        </div>
-        <div class="solutions-grid">
-          <div class="solution-item">
-            <div class="solution-content">
-              <h3>Utility Price Intelligence</h3>
-              <p>Transform complex utility pricing structures into actionable business intelligence. Our platform provides real-time analysis of utility rates, demand charges, and time-of-use pricing to help companies optimize their energy spend and identify cost-saving opportunities.</p>
-              <ul>
-                <li>Real-time rate analysis</li>
-                <li>Demand charge optimization</li>
-                <li>Time-of-use pricing strategies</li>
-                <li>Multi-utility portfolio management</li>
-              </ul>
-            </div>
-            <div class="solution-visual">
-              <div class="chart-placeholder">
-                <i class="fas fa-chart-bar"></i>
-              </div>
-            </div>
-          </div>
-          <div class="solution-item reverse">
-            <div class="solution-content">
-              <h3>Smart Grid Integration</h3>
-              <p>Leverage advanced smart grid technologies to enhance energy distribution efficiency, reduce operational costs, and improve grid reliability. Our solutions integrate seamlessly with existing infrastructure while providing scalable pathways for future expansion.</p>
-              <ul>
-                <li>Grid modernization consulting</li>
-                <li>IoT sensor integration</li>
-                <li>Real-time monitoring systems</li>
-                <li>Predictive maintenance analytics</li>
-              </ul>
-            </div>
-            <div class="solution-visual">
-              <div class="grid-placeholder">
-                <i class="fas fa-network-wired"></i>
-              </div>
-            </div>
-          </div>
-          <div class="solution-item">
-            <div class="solution-content">
-              <h3>Demand Response Programs</h3>
-              <p>Maximize revenue opportunities through intelligent demand response participation. Our automated systems monitor grid conditions, predict demand response events, and optimize your facility's participation to generate additional revenue streams while supporting grid stability.</p>
-              <ul>
-                <li>Automated DR participation</li>
-                <li>Revenue optimization</li>
-                <li>Load forecasting</li>
-                <li>Performance tracking</li>
-              </ul>
-            </div>
-            <div class="solution-visual">
-              <div class="demand-placeholder">
-                <i class="fas fa-bolt"></i>
-              </div>
-            </div>
-          </div>
-          <div class="solution-item reverse">
-            <div class="solution-content">
-              <h3>Grid Optimization</h3>
-              <p>Advanced algorithms and machine learning models that continuously optimize grid operations, reduce transmission losses, and enhance overall system efficiency. Our solutions provide utilities and grid operators with the tools needed for next-generation grid management.</p>
-              <ul>
-                <li>Load balancing optimization</li>
-                <li>Transmission loss reduction</li>
-                <li>Renewable integration</li>
-                <li>System reliability enhancement</li>
-              </ul>
-            </div>
-            <div class="solution-visual">
-              <div class="optimization-placeholder">
-                <i class="fas fa-cogs"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>-->
+            <div class="services-accordion">
+                <div class="service-item active">
+                    <div class="service-header">
+                        <div class="service-title"><span>📈</span> Market Data Components</div>
+                        <div class="service-toggle">+</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-body">
+                            <ul class="service-list">
+                                <li>Energy futures and forward curves</li>
+                                <li>Ancillary services and uplift forecasts</li>
+                                <li>Capacity cost forecasts by zone</li>
+                                <li>NITS cost forecasts</li>
+                                <li>REC prices and RPS obligation forecasts</li>
+                                <li>Utility price to compare (PTC) with forward projections</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Founder Section -->
-        <!-- Founder Section -->
-    <!-- Founder Section -->
-    <section id="founder" class="founder">
-      <div class="container">
-        <div class="section-header">
-          <h2>Team</h2>
+                <div class="service-item">
+                    <div class="service-header">
+                        <div class="service-title"><span>📋</span> Portfolio Valuation</div>
+                        <div class="service-toggle">+</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-body">
+                            <ul class="service-list">
+                                <li>One-time and recurring portfolio valuations</li>
+                                <li>Portfolio stratification for churn and retention</li>
+                                <li>Transaction support for acquisitions/divestitures</li>
+                                <li>Debt coverage ratio analyses</li>
+                                <li>Borrowing base analysis for credit facilities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-header">
+                        <div class="service-title"><span>🔄</span> Operational Support</div>
+                        <div class="service-toggle">+</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-body">
+                            <ul class="service-list">
+                                <li>Schedule preparation and submission</li>
+                                <li>Scheduled vs actual position monitoring</li>
+                                <li>Settlement accuracy support</li>
+                                <li>Monthly ISO billing validation and reporting</li>
+                                <li>Dispatch coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-header">
+                        <div class="service-title"><span>📑</span> Regulatory Support</div>
+                        <div class="service-toggle">+</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-body">
+                            <ul class="service-list">
+                                <li>Federal and state regulatory filings (PUC)</li>
+                                <li>ISO registration and participation</li>
+                                <li>Utility onboarding and EDI setup</li>
+                                <li>PPA, PSA, and ISDA documentation review</li>
+                                <li>Compliance record validation and reconstruction</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="founder-content">
-          <div class="founder-image">
-            <img src="anwar.png" alt="Founder - Mr. Rohan" style="max-width: 100%; border-radius: 10px;" />
-          </div>
-          <div class="founder-bio">
-            <h3><strong>Anwar Rohan</strong><br>Founder | Chief Executive Officer</h3>
-            <p>Mr.Rohan is a strategic leader and innovator in the retail energy space, with over 15 years of experience driving growth, building platforms, and unlocking value at the intersection of pricing, technology, and market strategy. His work spans electric and natural gas services across deregulated markets in the U.S., where he has led initiatives in pricing, structuring, trading, M&A, and software development.</p>
-            <p>At the core of his mission is a commitment to demystifying electricity market pricing and fostering greater transparency, access, and agility in how energy is priced, consumed, and managed. He envisions a modern grid that operates in synergy with real-time data, renewable energy, and smart technologies and has spent his career building the tools and strategies to make that vision real.</p>
-            <p>Anwar has led teams in scaling startups, launching customer-centric energy platforms, and delivering first-of-their-kind digital experiences that empower users to interact directly with market-based electricity pricing. His approach blends deep domain knowledge with a forward-looking mindset grounded in data integrity, technical fluency, and systemic thinking all aimed at shaping a smarter, more responsive energy future.</p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <div class="section-header">
-          <h2>Get In Touch</h2>
-          <p>Ready to transform your energy strategy? Let's discuss your needs</p>
-        </div>
-        <div class="contact-content">
-          <div class="contact-info">
-            <h3>Contact Information</h3>
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <div>
-                <h4>Email</h4>
-                <p>info@enerpricedata.com</p>
-              </div>
+    <!-- Platform Section -->
+    <section class="section" id="platform">
+        <div class="section-content">
+            <div class="section-header">
+                <div class="section-tag">The Platform</div>
+                <h2 class="section-title">EnerPrice Data Center (EPDC)</h2>
+                <p class="section-subtitle">
+                    Self-service access to validated datasets across power and natural gas markets.
+                </p>
             </div>
-            <div class="contact-item">
-              <i class="fas fa-phone"></i>
-              <div>
-                <h4>Phone</h4>
-                <p>+1 (302) 743-2799</p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <div>
-                <h4>Address</h4>
-                <p>Yacht Haven Grande<br>St Thomas, VI 00802</p>
-              </div>
-            </div>
-          </div>
-          <div class="contact-form">
-            <h3>Send us a Message</h3>
-            <form id="contact-form">
-              <div class="form-group">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-              </div>
-              <div class="form-group">
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-              </div>
-              <div class="form-group">
-                <input type="text" id="company" name="company" placeholder="Company Name">
-              </div>
-              <div class="form-group phone-group">
-                  <div class="phone-wrapper">
-                    <span class="country-code"></span>
-                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn-primary">Send Message</button>
-              </form>
 
-              <!--<div class="form-group">
-                <select id="service" name="service" required>
-                  <option value="">Select Service Interest</option>
-                  <option value="forecasting">Energy Price Forecasting</option>
-                  <option value="risk-management">Risk Management</option>
-                  <option value="pricing-models">Automated Pricing Models</option>
-                  <option value="datasets">Line Items Datasets</option>
-                  <option value="smart-grid">Smart Grid Solutions</option>
-                  <option value="demand-response">Demand Response</option>
-                  <option value="grid-optimization">Grid Optimization</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-              </div>
-              <button type="submit" class="btn-primary">Send Message</button>
-            </form>-->
-          </div>
+            <div class="platform-showcase">
+                <div class="platform-visual platform-carousel-wrap">
+                    <div class="epdc-carousel" id="epdc-carousel">
+                        <div class="epdc-carousel-inner">
+                            <div class="epdc-slide active" data-index="0">
+                                <img src="EnergyFutures.gif" alt="Energy" />
+                                <span class="epdc-slide-label">Energy</span>
+                            </div>
+                            <div class="epdc-slide" data-index="1">
+                                <img src="Ancillary.gif" alt="Ancillary" />
+                                <span class="epdc-slide-label">Ancillary</span>
+                            </div>
+                            <div class="epdc-slide" data-index="2">
+                                <img src="REC.gif" alt="REC" />
+                                <span class="epdc-slide-label">REC</span>
+                            </div>
+                            <div class="epdc-slide" data-index="3">
+                                <img src="PTC.gif" alt="PTC" />
+                                <span class="epdc-slide-label">PTC</span>
+                            </div>
+                        </div>
+                        <button type="button" class="epdc-carousel-btn epdc-prev" id="epdc-prev" aria-label="Previous">‹</button>
+                        <button type="button" class="epdc-carousel-btn epdc-next" id="epdc-next" aria-label="Next">›</button>
+                        <div class="epdc-dots" id="epdc-dots">
+                            <button type="button" class="epdc-dot active" data-index="0" aria-label="Energy"></button>
+                            <button type="button" class="epdc-dot" data-index="1" aria-label="Ancillary"></button>
+                            <button type="button" class="epdc-dot" data-index="2" aria-label="REC"></button>
+                            <button type="button" class="epdc-dot" data-index="3" aria-label="PTC"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-features">
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">📊</div>
+                        <div>
+                            <h4>Real-Time Visualization</h4>
+                            <p>Interactive dashboards for pricing, settlement, and forecast data</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">🔒</div>
+                        <div>
+                            <h4>Version Controlled Templates</h4>
+                            <p>Consistency and auditability across all reporting outputs</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">🔄</div>
+                        <div>
+                            <h4>Automated Updates</h4>
+                            <p>Data validation routines ensure accuracy and reliability</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">🔌</div>
+                        <div>
+                            <h4>API Integration</h4>
+                            <p>Secure file delivery and system integration options</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">📈</div>
+                        <div>
+                            <h4>Historical Benchmarking</h4>
+                            <p>Performance analyses against historical market data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-        <!-- Demo Modal -->
-    <div id="demo-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Schedule a Demo</h3>
-          <span class="close">&times;</span>
+    <!-- Team Section (from index.html) -->
+    <section class="section" id="team">
+        <div class="section-content">
+            <div class="section-header">
+                <div class="section-tag">Leadership</div>
+                <h2 class="section-title">Team</h2>
+            </div>
+            <div class="founder-content">
+                <div class="founder-image">
+                    <img src="anwar.png" alt="Anwar Rohan - Founder & CEO" />
+                </div>
+                <div class="founder-bio">
+                    <h3><strong>Anwar Rohan</strong><br>Founder | Chief Executive Officer</h3>
+                    <p>Mr. Rohan is a strategic leader and innovator in the retail energy space, with over 15 years of experience driving growth, building platforms, and unlocking value at the intersection of pricing, technology, and market strategy. His work spans electric and natural gas services across deregulated markets in the U.S., where he has led initiatives in pricing, structuring, trading, M&A, and software development.</p>
+                    <p>At the core of his mission is a commitment to demystifying electricity market pricing and fostering greater transparency, access, and agility in how energy is priced, consumed, and managed. He envisions a modern grid that operates in synergy with real-time data, renewable energy, and smart technologies and has spent his career building the tools and strategies to make that vision real.</p>
+                    <p>Anwar has led teams in scaling startups, launching customer-centric energy platforms, and delivering first-of-their-kind digital experiences that empower users to interact directly with market-based electricity pricing. His approach blends deep domain knowledge with a forward-looking mindset grounded in data integrity, technical fluency, and systemic thinking all aimed at shaping a smarter, more responsive energy future.</p>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Book a personalized demo to see how EnerPrice can transform your energy strategy.</p>
-    
-          <!-- Calendly Embed Start -->
-          <div class="calendly-inline-widget"
-               data-url="https://calendly.com/info-enerpricedata/30min"
-               style="min-width:320px; height:630px;">
-          </div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-          <!-- Calendly Embed End -->
-    
-        </div>
-      </div>
-    </div>
+    </section>
 
-
-    <!-- Demo Modal -->
-    <!--<div id="demo-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Schedule a Demo</h3>
-          <span class="close">&times;</span>
+    <!-- Contact Section (from index.html) -->
+    <section class="section" id="contact">
+        <div class="section-content">
+            <div class="section-header">
+                <div class="section-tag">Get In Touch</div>
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">Ready to transform your energy strategy? Let's discuss your needs.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@enerpricedata.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (302) 743-2799</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>Yacht Haven Grande<br>St Thomas, VI 00802</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="company" name="company" placeholder="Company Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Book a personalized demo to see how EnerPrice can transform your energy strategy.</p>
-          <form id="demo-form">
-            <div class="form-group">
-              <input type="text" id="demo-name" name="name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-              <input type="email" id="demo-email" name="email" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-              <input type="text" id="demo-company" name="company" placeholder="Company Name" required>
-            </div>
-            <div class="form-group">
-              <input type="tel" id="demo-phone" name="phone" placeholder="Phone Number">
-            </div>
-            <div class="form-group">
-              <select id="demo-service" name="service" required>
-                <option value="">Primary Interest</option>
-                <option value="forecasting">Energy Price Forecasting</option>
-                <option value="risk-management">Risk Management</option>
-                <option value="pricing-models">Automated Pricing Models</option>
-                <option value="datasets">Line Items Datasets</option>
-                <option value="smart-grid">Smart Grid Solutions</option>
-                <option value="demand-response">Demand Response</option>
-                <option value="grid-optimization">Grid Optimization</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <input type="date" id="demo-date" name="preferred-date" required>
-            </div>
-            <div class="form-group">
-              <select id="demo-time" name="preferred-time" required>
-                <option value="">Preferred Time</option>
-                <option value="09:00">9:00 AM</option>
-                <option value="10:00">10:00 AM</option>
-                <option value="11:00">11:00 AM</option>
-                <option value="14:00">2:00 PM</option>
-                <option value="15:00">3:00 PM</option>
-                <option value="16:00">4:00 PM</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <textarea id="demo-notes" name="notes" placeholder="Additional notes or specific topics you'd like to discuss" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn-primary">Schedule Demo</button>
-          </form>
-        </div>
-      </div>
-    </div>-->
+    </section>
 
     <!-- Footer -->
-    <!-- <footer class="footer">
-      <div class="container">
+    <footer class="footer">
         <div class="footer-content">
-          <div class="footer-section">
-            <h3>EnerPrice</h3>
-            <p>Leading the future of energy market intelligence and risk management through precision-driven solutions.</p>
-          </div>
-          <div class="footer-section">
-            <h4>Services</h4>
-            <ul>
-              <li><a href="#services">Price Forecasting</a></li>
-              <li><a href="#services">Risk Management</a></li>
-              <li><a href="#services">Automated Pricing</a></li>
-              <li><a href="#services">Data Analytics</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Solutions</h4>
-            <ul>
-              <li><a href="#solutions">Smart Grid</a></li>
-              <li><a href="#solutions">Demand Response</a></li>
-              <li><a href="#solutions">Grid Optimization</a></li>
-              <li><a href="#solutions">Utility Intelligence</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Connect</h4>
-            <ul>
-              <li><a href="#contact">Contact Us</a></li>
-              <li><a href="#founder">About Founder</a></li>
-              <li><button class="footer-demo-btn">Schedule Demo</button></li>
-            </ul>
-          </div>
+            <div class="footer-brand">
+                <a href="#home" style="display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;color:white;">
+                    <img src="epdfav.png" alt="EnerPrice" class="footer-logo-icon" />
+                    <span style="font-weight:700;">ENER<span style="color:var(--accent);">PRICE</span> DATA</span>
+                </a>
+                <p>
+                    Energy market data and risk management for U.S. power and natural gas markets.
+                </p>
+            </div>
+            <div>
+                <div class="footer-title">Capabilities</div>
+                <ul class="footer-links">
+                    <li><a href="#capabilities">Market Data & Analytics</a></li>
+                    <li><a href="#capabilities">Pricing & Valuation</a></li>
+                    <li><a href="#capabilities">Risk Management</a></li>
+                    <li><a href="#capabilities">Regulatory Compliance</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Connect</div>
+                <ul class="footer-links">
+                    <li><a href="#" class="schedule-demo-btn-footer">Schedule Demo</a></li>
+                    <li><a href="https://app.enerpricedata.com/" target="_blank" rel="noopener">Login to the app</a></li>
+                    <li><a href="mailto:info@enerpricedata.com">info@enerpricedata.com</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Contact</div>
+                <ul class="footer-links">
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="https://www.enerpricedata.com">www.enerpricedata.com</a></li>
+                </ul>
+            </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2025 EnerPrice. All rights reserved.</p>
+            <div>© 2025 EnerPrice Data. All rights reserved.</div>
+            <div>Ahead Of The Curve</div>
         </div>
-      </div>
-    </footer>-->
+    </footer>
 
-    <script src="main.js"></script>
-  </body>
+    <!-- Schedule Demo Modal (Calendly from index.html) -->
+    <div id="demo-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Schedule a Demo</h3>
+                <button type="button" class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Book a personalized demo to see how EnerPrice can transform your energy strategy.</p>
+                <div class="calendly-inline-widget"
+                     data-url="https://calendly.com/info-enerpricedata/30min"
+                     style="min-width:320px; height:630px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script>
+        // Schedule Demo modal
+        (function() {
+            var modal = document.getElementById('demo-modal');
+            var openBtns = document.querySelectorAll('#hero-demo-btn, #schedule-demo-hero, .schedule-demo-btn-footer');
+            var closeBtn = document.getElementById('modal-close');
+
+            function openModal() {
+                if (modal) {
+                    modal.classList.add('show');
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeModal() {
+                if (modal) {
+                    modal.classList.remove('show');
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            openBtns.forEach(function(btn) {
+                if (btn) btn.addEventListener('click', openModal);
+            });
+            var mobileDemoBtn = document.getElementById('mobile-demo-btn');
+            if (mobileDemoBtn) mobileDemoBtn.addEventListener('click', function() {
+                openModal();
+                var mobileNav = document.getElementById('mobile-nav');
+                if (mobileNav) mobileNav.classList.remove('open');
+            });
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) closeModal();
+                });
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal && modal.classList.contains('show')) closeModal();
+            });
+        })();
+
+        // Accordion
+        document.querySelectorAll('.service-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+                var item = header.parentElement;
+                var wasActive = item.classList.contains('active');
+                document.querySelectorAll('.service-item').forEach(function(i) {
+                    i.classList.remove('active');
+                });
+                if (!wasActive) item.classList.add('active');
+            });
+        });
+
+        // EPDC carousel (Energy, Ancillary, REC, PTC)
+        (function() {
+            var slides = document.querySelectorAll('#epdc-carousel .epdc-slide');
+            var dots = document.querySelectorAll('#epdc-carousel .epdc-dot');
+            var prevBtn = document.getElementById('epdc-prev');
+            var nextBtn = document.getElementById('epdc-next');
+            var total = slides.length;
+            var current = 0;
+            var autoInterval;
+
+            function goTo(index) {
+                current = (index + total) % total;
+                slides.forEach(function(s, i) {
+                    s.classList.toggle('active', i === current);
+                });
+                dots.forEach(function(d, i) {
+                    d.classList.toggle('active', i === current);
+                });
+            }
+
+            function next() { goTo(current + 1); }
+            function prev() { goTo(current - 1); }
+
+            function startAuto() {
+                stopAuto();
+                autoInterval = setInterval(next, 5000);
+            }
+            function stopAuto() {
+                if (autoInterval) clearInterval(autoInterval);
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', function() { stopAuto(); prev(); startAuto(); });
+            if (nextBtn) nextBtn.addEventListener('click', function() { stopAuto(); next(); startAuto(); });
+            dots.forEach(function(dot, i) {
+                dot.addEventListener('click', function() {
+                    stopAuto();
+                    goTo(i);
+                    startAuto();
+                });
+            });
+
+            startAuto();
+        })();
+
+        // Smooth scroll with fixed header offset
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                var target = document.querySelector(href);
+                if (target) {
+                    var offset = 80;
+                    var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Contact form prevent default
+        var contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message. We will get back to you soon.');
+                contactForm.reset();
+            });
+        }
+
+        // Scroll animations
+        var observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Mobile menu
+        (function() {
+            var btn = document.getElementById('mobile-menu-btn');
+            var nav = document.getElementById('mobile-nav');
+            if (btn && nav) {
+                btn.addEventListener('click', function() {
+                    nav.classList.toggle('open');
+                });
+                nav.querySelectorAll('a').forEach(function(a) {
+                    a.addEventListener('click', function() {
+                        nav.classList.remove('open');
+                    });
+                });
+            }
+        })();
+
+        document.querySelectorAll('.capability-card, .stat-item, .platform-feature').forEach(function(el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
 </html>

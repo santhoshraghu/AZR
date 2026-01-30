@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnerPrice Data | Capabilities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5f7a;
+            --primary-dark: #0d3d4d;
+            --accent: #57c5b6;
+            --accent-light: #9fe8dc;
+            --dark: #0a1628;
+            --dark-blue: #112240;
+            --light: #f8fafb;
+            --gray: #64748b;
+            --gradient-energy: linear-gradient(135deg, #1a5f7a 0%, #57c5b6 50%, #9fe8dc 100%);
+            --gradient-dark: linear-gradient(180deg, #0a1628 0%, #112240 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient-dark);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-energy);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse at 70% 30%, rgba(87, 197, 182, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -20%;
+            width: 80%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(26, 95, 122, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Grid pattern overlay */
+        .grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(87, 197, 182, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(87, 197, 182, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(87, 197, 182, 0.1);
+            border: 1px solid rgba(87, 197, 182, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge::before {
+            content: '⚡';
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-energy);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-energy);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(87, 197, 182, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            padding: 3rem 2rem;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-dark {
+            background: var(--gradient-dark);
+            color: white;
+        }
+
+        .section-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-dark .section-subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Capabilities Grid */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .capability-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .capability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-energy);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .capability-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .capability-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(26, 95, 122, 0.1) 0%, rgba(87, 197, 182, 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .capability-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .capability-description {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .capability-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(87, 197, 182, 0.1);
+            color: var(--primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Services Accordion */
+        .services-accordion {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            border-color: rgba(87, 197, 182, 0.3);
+        }
+
+        .service-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .service-title span {
+            font-size: 1.5rem;
+        }
+
+        .service-toggle {
+            color: var(--accent);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-item.active .service-toggle {
+            transform: rotate(45deg);
+        }
+
+        .service-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .service-item.active .service-content {
+            max-height: 500px;
+        }
+
+        .service-body {
+            padding: 0 2rem 1.5rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .service-list {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .service-list li::before {
+            content: '→';
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* Platform Section */
+        .platform-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .platform-visual {
+            background: var(--gradient-dark);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(87, 197, 182, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(87, 197, 182, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .platform-mockup {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .mockup-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mockup-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .mockup-dot:first-child { background: #ff5f57; }
+        .mockup-dot:nth-child(2) { background: #febc2e; }
+        .mockup-dot:nth-child(3) { background: #28c840; }
+
+        .mockup-content {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .mockup-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .mockup-bar {
+            height: 8px;
+            background: var(--gradient-energy);
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+
+        .mockup-label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .platform-features {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .platform-feature {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .platform-feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(26, 95, 122, 0.1) 0%, rgba(87, 197, 182, 0.1) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .platform-feature h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .platform-feature p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-energy);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            color: rgba(0,0,0,0.7);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-dark {
+            background: var(--dark);
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .platform-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .stats-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-text">ENER<span>PRICE</span> DATA</div>
+            </a>
+            <nav class="nav">
+                <a href="#capabilities">Capabilities</a>
+                <a href="#services">Services</a>
+                <a href="#platform">Platform</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="grid-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Energy Market Intelligence</div>
+            <h1>Stay <span>Ahead Of The Curve</span></h1>
+            <p class="hero-subtitle">
+                Reliable market data, pricing analytics, and operational insight for U.S. power and natural gas markets. 
+                Built on proprietary data infrastructure and practical market experience.
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Get Started →</a>
+                <a href="#capabilities" class="btn btn-secondary">Explore Capabilities</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-content">
+            <div class="stat-item">
+                <div class="stat-number">60+</div>
+                <div class="stat-label">Months Forward Coverage</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Major ISOs Covered</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">120</div>
+                <div class="stat-label">Months Extended Coverage</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Data Platform Access</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Capabilities Section -->
+    <section class="section" id="capabilities">
+        <div class="section-content">
+            <div class="section-header">
+                <div class="section-tag">What We Offer</div>
+                <h2 class="section-title">Core Capabilities</h2>
+                <p class="section-subtitle">
+                    Full requirements market data and analytics supporting pricing, valuation, 
+                    and risk management across U.S. power and natural gas markets.
+                </p>
+            </div>
+
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">📊</div>
+                    <h3 class="capability-title">Market Data & Analytics</h3>
+                    <p class="capability-description">
+                        Granular forward market costs by ISO, zone, and utility. Delivered through 
+                        the EnerPrice Data Center (EPDC) or integrated directly into your workflows.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">Energy Futures</span>
+                        <span class="feature-tag">Capacity Forecasts</span>
+                        <span class="feature-tag">REC Prices</span>
+                        <span class="feature-tag">RPS Forecasts</span>
+                        <span class="feature-tag">Utility PTC</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">💰</div>
+                    <h3 class="capability-title">Pricing, Structuring & Valuation</h3>
+                    <p class="capability-description">
+                        Commercial decision support across retail and wholesale power markets 
+                        including daily prices, matrix pricing, and custom product structuring.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">Daily Pricing</span>
+                        <span class="feature-tag">Matrix Pricing</span>
+                        <span class="feature-tag">Block & Index</span>
+                        <span class="feature-tag">Capped Structures</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">🛡️</div>
+                    <h3 class="capability-title">Risk Management & Portfolio Support</h3>
+                    <p class="capability-description">
+                        Maintain visibility and control in day-to-day portfolio operations 
+                        with position tracking, hedging support, and risk reporting.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">Position Management</span>
+                        <span class="feature-tag">Hedge Analysis</span>
+                        <span class="feature-tag">Scheduling</span>
+                        <span class="feature-tag">Risk Reporting</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">⚖️</div>
+                    <h3 class="capability-title">Regulatory & Compliance</h3>
+                    <p class="capability-description">
+                        Navigate regulatory exposure with comprehensive market data, continuous 
+                        research into rules and tariffs, and decades of portfolio management experience.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">RPS Compliance</span>
+                        <span class="feature-tag">FERC Tracking</span>
+                        <span class="feature-tag">Lost Savings</span>
+                        <span class="feature-tag">PTC Analysis</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">⚙️</div>
+                    <h3 class="capability-title">Asset Management & Optimization</h3>
+                    <p class="capability-description">
+                        Streamline operational tasks with ISO system integration, billing validation, 
+                        and automated workflows from forecast through settlement.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">DA Forecasting</span>
+                        <span class="feature-tag">Load Reconciliation</span>
+                        <span class="feature-tag">Billing Validation</span>
+                        <span class="feature-tag">Automation</span>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">🎯</div>
+                    <h3 class="capability-title">Strategic Advisory & Reporting</h3>
+                    <p class="capability-description">
+                        Evaluate new opportunities, enter new markets, and make informed 
+                        commercial decisions with executive-level dashboards and insights.
+                    </p>
+                    <div class="capability-features">
+                        <span class="feature-tag">Market Entry</span>
+                        <span class="feature-tag">ISO Registration</span>
+                        <span class="feature-tag">Executive Dashboards</span>
+                        <span class="feature-tag">PPA Review</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section section-dark" id="services">
+        <div class="section-content">
+            <div class="section-header">
+                <div class="section-tag">How We Deliver</div>
+                <h2 class="section-title">Service Areas</h2>
+                <p class="section-subtitle">
+                    Flexible engagement models from self-service data access to fully outsourced 
+                    analytical and operational support.
+                </p>
+            </div>
+
+            <div class="services-accordion">
+                <div class="service-item active">
+                    <div class="service-header">
+                        <div class="service-title"><span>📈</span> Market Data Components</div>
+                        <div class="service-toggle">+</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-body">
+                            <ul class="service-list">
+                                <li>Energy futures and forward curves</li>
+                                <li>Ancillary services and uplift forecasts</li>
+                                <li>Capacity cost forecasts by zone</li>
+                                <li>NITS cost forecasts</li>
+                                <li>REC prices and RPS obligation forecasts</li>
+                                <li>Utility price to compare (PTC) with forward projections</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-header">
+                        <div class="service-title"><span>📋</span> Portfolio Valuation</div>
+                        <div class="service-toggle">+</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-body">
+                            <ul class="service-list">
+                                <li>One-time and recurring portfolio valuations</li>
+                                <li>Portfolio stratification for churn and retention</li>
+                                <li>Transaction support for acquisitions/divestitures</li>
+                                <li>Debt coverage ratio analyses</li>
+                                <li>Borrowing base analysis for credit facilities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-header">
+                        <div class="service-title"><span>🔄</span> Operational Support</div>
+                        <div class="service-toggle">+</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-body">
+                            <ul class="service-list">
+                                <li>Schedule preparation and submission</li>
+                                <li>Scheduled vs actual position monitoring</li>
+                                <li>Settlement accuracy support</li>
+                                <li>Monthly ISO billing validation and reporting</li>
+                                <li>Dispatch coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-header">
+                        <div class="service-title"><span>📑</span> Regulatory Support</div>
+                        <div class="service-toggle">+</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-body">
+                            <ul class="service-list">
+                                <li>Federal and state regulatory filings (PUC)</li>
+                                <li>ISO registration and participation</li>
+                                <li>Utility onboarding and EDI setup</li>
+                                <li>PPA, PSA, and ISDA documentation review</li>
+                                <li>Compliance record validation and reconstruction</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Section -->
+    <section class="section" id="platform">
+        <div class="section-content">
+            <div class="section-header">
+                <div class="section-tag">The Platform</div>
+                <h2 class="section-title">EnerPrice Data Center (EPDC)</h2>
+                <p class="section-subtitle">
+                    Self-service access to validated datasets across power and natural gas markets.
+                </p>
+            </div>
+
+            <div class="platform-showcase">
+                <div class="platform-visual">
+                    <div class="platform-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="mockup-row">
+                                <span class="mockup-label">ERCOT North</span>
+                                <div class="mockup-bar" style="width: 85%;"></div>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="mockup-label">ERCOT Houston</span>
+                                <div class="mockup-bar" style="width: 72%;"></div>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="mockup-label">ERCOT South</span>
+                                <div class="mockup-bar" style="width: 68%;"></div>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="mockup-label">ERCOT West</span>
+                                <div class="mockup-bar" style="width: 91%;"></div>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="mockup-label">PJM West</span>
+                                <div class="mockup-bar" style="width: 54%;"></div>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="mockup-label">ISO-NE</span>
+                                <div class="mockup-bar" style="width: 63%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-features">
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">📊</div>
+                        <div>
+                            <h4>Real-Time Visualization</h4>
+                            <p>Interactive dashboards for pricing, settlement, and forecast data</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">🔒</div>
+                        <div>
+                            <h4>Version Controlled Templates</h4>
+                            <p>Consistency and auditability across all reporting outputs</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">🔄</div>
+                        <div>
+                            <h4>Automated Updates</h4>
+                            <p>Data validation routines ensure accuracy and reliability</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">🔌</div>
+                        <div>
+                            <h4>API Integration</h4>
+                            <p>Secure file delivery and system integration options</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="platform-feature-icon">📈</div>
+                        <div>
+                            <h4>Historical Benchmarking</h4>
+                            <p>Performance analyses against historical market data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Stay Ahead of the Curve?</h2>
+            <p class="cta-subtitle">
+                Let's discuss how EnerPrice Data can support your market data and analytics needs.
+            </p>
+            <a href="mailto:info@enerpricedata.com" class="btn btn-dark">
+                Contact Us →
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">⚡</div>
+                    <div class="logo-text">ENER<span>PRICE</span> DATA</div>
+                </a>
+                <p>
+                    Energy market data and risk management for U.S. power and natural gas markets.
+                </p>
+            </div>
+            <div>
+                <div class="footer-title">Capabilities</div>
+                <ul class="footer-links">
+                    <li><a href="#capabilities">Market Data & Analytics</a></li>
+                    <li><a href="#capabilities">Pricing & Valuation</a></li>
+                    <li><a href="#capabilities">Risk Management</a></li>
+                    <li><a href="#capabilities">Regulatory Compliance</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Services</div>
+                <ul class="footer-links">
+                    <li><a href="#services">Self-Service Data</a></li>
+                    <li><a href="#services">Managed Reporting</a></li>
+                    <li><a href="#services">Outsourced Support</a></li>
+                    <li><a href="#platform">EPDC Platform</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Contact</div>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@enerpricedata.com">info@enerpricedata.com</a></li>
+                    <li><a href="https://www.enerpricedata.com">www.enerpricedata.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2025 EnerPrice Data. All rights reserved.</div>
+            <div>Ahead Of The Curve</div>
+        </div>
+    </footer>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.service-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const wasActive = item.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.service-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.capability-card, .stat-item, .platform-feature').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
