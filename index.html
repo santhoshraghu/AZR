@@ -679,7 +679,8 @@
             z-index: 1;
         }
 
-        .epdc-slide img {
+        .epdc-slide img,
+        .epdc-slide video {
             flex: 1;
             min-height: 0;
             width: 100%;
@@ -687,6 +688,7 @@
             object-fit: contain;
             display: block;
             border-radius: 8px;
+            background: rgba(26, 95, 122, 0.1);
         }
 
         .epdc-slide-label {
@@ -1464,19 +1466,27 @@
                     <div class="epdc-carousel" id="epdc-carousel">
                         <div class="epdc-carousel-inner">
                             <div class="epdc-slide active" data-index="0">
-                                <img src="EnergyFutures.gif" alt="Energy" />
+                                <video autoplay loop muted playsinline>
+                                    <source src="EnergyFutures.mp4" type="video/mp4">
+                                </video>
                                 <span class="epdc-slide-label">Energy</span>
                             </div>
                             <div class="epdc-slide" data-index="1">
-                                <img src="Ancillary.gif" alt="Ancillary" />
+                                <video autoplay loop muted playsinline>
+                                    <source src="Ancillary.mp4" type="video/mp4">
+                                </video>
                                 <span class="epdc-slide-label">Ancillary</span>
                             </div>
                             <div class="epdc-slide" data-index="2">
-                                <img src="REC.gif" alt="REC" />
+                                <video autoplay loop muted playsinline>
+                                    <source src="REC.mp4" type="video/mp4">
+                                </video>
                                 <span class="epdc-slide-label">REC</span>
                             </div>
                             <div class="epdc-slide" data-index="3">
-                                <img src="PTC.gif" alt="PTC" />
+                                <video autoplay loop muted playsinline>
+                                    <source src="PTC.mp4" type="video/mp4">
+                                </video>
                                 <span class="epdc-slide-label">PTC</span>
                             </div>
                         </div>
@@ -1740,7 +1750,18 @@
             function goTo(index) {
                 current = (index + total) % total;
                 slides.forEach(function(s, i) {
-                    s.classList.toggle('active', i === current);
+                    var isActive = i === current;
+                    s.classList.toggle('active', isActive);
+                    // Pause/play videos based on active state
+                    var video = s.querySelector('video');
+                    if (video) {
+                        if (isActive) {
+                            video.play().catch(function() {});
+                        } else {
+                            video.pause();
+                            video.currentTime = 0;
+                        }
+                    }
                 });
                 dots.forEach(function(d, i) {
                     d.classList.toggle('active', i === current);
